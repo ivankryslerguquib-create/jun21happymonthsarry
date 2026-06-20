@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>happymonthsary &amp; lovey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blush:#F7E8E4;
+    --wine:#6B2737;
+    --wine-deep:#4E1B27;
+    --gold:#C9A24B;
+    --gold-soft:#E2C988;
+    --paper:#FBF6F0;
+    --sage:#8A9B7E;
+    --ink:#2A1F1D;
+    --ink-soft:#5b4b47;
+    --shadow: 0 18px 40px -18px rgba(74, 31, 41, 0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Playfair Display', serif;
+    margin:0;
+  }
+
+  ::selection{ background:var(--gold-soft); color:var(--wine-deep); }
+
+  .grain{
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:1;
+    opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  nav{
+    position:fixed;
+    top:24px; left:50%;
+    transform:translateX(-50%);
+    z-index:100;
+    display:flex;
+    gap:4px;
+    background:rgba(251,246,240,0.78);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(107,39,55,0.14);
+    border-radius:999px;
+    padding:6px;
+    box-shadow:var(--shadow);
+  }
+  nav button{
+    font-family:'Cormorant Garamond', serif;
+    font-size:15px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    background:none;
+    border:none;
+    color:var(--ink-soft);
+    padding:10px 18px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .35s ease, color .35s ease;
+    position:relative;
+  }
+  nav button.active{
+    background:var(--wine);
+    color:var(--blush);
+  }
+  nav button:hover:not(.active){ color:var(--wine); }
+
+  @media (max-width:560px){
+    nav{ gap:0; padding:5px; }
+    nav button{ padding:8px 11px; font-size:12.5px; letter-spacing:.04em; }
+  }
+
+  section{
+    min-height:100vh;
+    display:none;
+    position:relative;
+    z-index:2;
+    padding:140px 24px 100px;
+  }
+  section.active{ display:block; animation:fadeIn .8s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;} }
+
+  .wrap{ max-width:920px; margin:0 auto; }
+  .eyebrow{
+    text-align:center;
+    text-transform:uppercase;
+    letter-spacing:0.32em;
+    font-size:12.5px;
+    color:var(--wine);
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    margin-bottom:14px;
+  }
+
+  /* ============ HOME ============ */
+  #home{ display:block; padding-top:0; }
+  .home-stage{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:120px 24px 60px;
+  }
+
+  .bloom-wrap{
+    width:min(70vw, 420px);
+    height:min(70vw, 420px);
+    margin-bottom:8px;
+    position:relative;
+  }
+
+  .home-title{
+    font-size:clamp(34px, 7vw, 64px);
+    font-weight:600;
+    color:var(--wine-deep);
+    letter-spacing:0.01em;
+    margin-top:6px;
+  }
+  .home-title em{
+    font-style:italic;
+    color:var(--gold);
+  }
+  .home-sub{
+    font-size:clamp(16px,2.6vw,20px);
+    color:var(--ink-soft);
+    letter-spacing:0.06em;
+    margin-top:10px;
+    font-style:italic;
+  }
+
+  /* ornamental divider replacing the months/days/hours counter */
+  .ornament-row{
+    margin-top:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    width:100%;
+    max-width:360px;
+  }
+  .ornament-line{
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity:0.6;
+  }
+  .ornament-row svg{
+    width:22px; height:22px;
+    flex-shrink:0;
+    animation:heartbeat 2.4s ease-in-out infinite;
+    transform-origin:center;
+  }
+  @keyframes heartbeat{
+    0%, 100%{ transform:scale(1); }
+    15%{ transform:scale(1.18); }
+    30%{ transform:scale(1); }
+    45%{ transform:scale(1.12); }
+    60%{ transform:scale(1); }
+  }
+  .ornament-words{
+    margin-top:16px;
+    font-size:14px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--sage);
+  }
+
+  .enter-hint{
+    margin-top:46px;
+    font-size:14px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--sage);
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease;
+  }
+  .enter-hint:hover{ border-color:var(--sage); }
+
+  .petal-field{
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:0;
+    overflow:hidden;
+  }
+  .petal{
+    position:absolute;
+    top:-40px;
+    opacity:0.8;
+    will-change:transform;
+    animation-name:fall;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+  }
+  @keyframes fall{
+    0%{ transform:translateY(-5vh) translateX(0) rotate(0deg); }
+    100%{ transform:translateY(110vh) translateX(var(--drift)) rotate(340deg); }
+  }
+
+  /* ============ GALLERY ============ */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:22px;
+    margin-top:50px;
+  }
+  .frame{
+    background:var(--blush);
+    border-radius:4px;
+    padding:14px 14px 46px;
+    box-shadow:var(--shadow);
+    transform:rotate(var(--tilt));
+    transition:transform .35s ease, box-shadow .35s ease;
+    position:relative;
+    cursor:pointer;
+  }
+  .frame:hover{
+    transform:rotate(0deg) translateY(-6px) scale(1.02);
+    box-shadow:0 24px 48px -16px rgba(74,31,41,0.4);
+    z-index:5;
+  }
+  .frame .photo{
+    aspect-ratio:1/1;
+    border-radius:2px;
+    background:
+      linear-gradient(135deg, rgba(107,39,55,0.08), rgba(201,162,75,0.12)),
+      repeating-linear-gradient(45deg, rgba(107,39,55,0.05) 0 2px, transparent 2px 14px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--wine);
+    opacity:0.55;
+  }
+  .frame .cap{
+    position:absolute;
+    bottom:12px; left:0; right:0;
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:15px;
+    color:var(--ink-soft);
+  }
+  .gallery-note{
+    text-align:center;
+    margin-top:40px;
+    font-size:14px;
+    color:var(--ink-soft);
+    font-style:italic;
+    opacity:0.75;
+  }
+
+  /* ============ LETTER ============ */
+  .letter-stage{
+    display:flex;
+    justify-content:center;
+  }
+  .envelope{
+    width:min(90vw, 420px);
+    cursor:pointer;
+    position:relative;
+  }
+  .env-body{
+    background:var(--wine);
+    height:240px;
+    border-radius:6px;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+  .env-body::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(135deg, rgba(255,255,255,0.06), transparent 60%);
+  }
+  .flap{
+    position:absolute;
+    top:0; left:0; right:0;
+    height:130px;
+    background:var(--wine-deep);
+    clip-path:polygon(0 0, 100% 0, 50% 100%);
+    transform-origin:top;
+    transition:transform .7s cubic-bezier(.6,-0.1,.3,1.2);
+    z-index:3;
+  }
+  .envelope.open .flap{ transform:rotateX(180deg); }
+  .seal{
+    position:absolute;
+    left:50%; top:88px;
+    transform:translate(-50%, -50%);
+    width:56px; height:56px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold) 70%);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 14px rgba(0,0,0,0.25);
+    z-index:4;
+    transition:opacity .3s ease, transform .4s ease;
+  }
+  .envelope.open .seal{ opacity:0; transform:translate(-50%,-50%) scale(0.4); }
+  .seal svg{ width:26px; height:26px; }
+
+  .letter-hint{
+    text-align:center;
+    margin-top:18px;
+    font-size:14px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--sage);
+  }
+  .envelope.open ~ .letter-hint{ opacity:0; }
+
+  .letter-paper{
+    max-width:640px;
+    margin:34px auto 0;
+    background:var(--paper);
+    border:1px solid rgba(107,39,55,0.15);
+    border-radius:6px;
+    padding:clamp(28px,5vw,56px);
+    box-shadow:var(--shadow);
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    transition:opacity .8s ease, max-height 1.1s ease;
+  }
+  .letter-paper.show{
+    opacity:1;
+    max-height:1800px;
+  }
+  .letter-paper h3{
+    font-style:italic;
+    color:var(--wine);
+    font-size:22px;
+    margin-bottom:18px;
+  }
+  .letter-paper p{
+    margin:0 0 16px;
+    font-size:18.5px;
+    color:var(--ink);
+  }
+  .letter-paper .sign{
+    margin-top:28px;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:24px;
+    color:var(--wine-deep);
+    text-align:right;
+  }
+
+  /* ============ MUSIC ============ */
+  .player{
+    max-width:420px;
+    margin:50px auto 0;
+    background:linear-gradient(160deg, var(--wine) 0%, var(--wine-deep) 100%);
+    border-radius:18px;
+    padding:36px 30px 30px;
+    box-shadow:var(--shadow);
+    color:var(--blush);
+    text-align:center;
+  }
+  .vinyl{
+    width:160px; height:160px;
+    margin:0 auto 26px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at center, var(--gold) 0 8%, var(--ink) 9% 10%, #1a1212 11% 100%),
+      repeating-radial-gradient(circle at center, rgba(255,255,255,0.04) 0 2px, transparent 2px 6px);
+    position:relative;
+    transition:transform .2s linear;
+  }
+  .vinyl.spin{ animation:spin 6s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .vinyl::after{
+    content:"";
+    position:absolute; inset:0;
+    margin:auto;
+    width:10px;height:10px;
+    border-radius:50%;
+    background:var(--paper);
+  }
+
+  .track-title{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:21px;
+    margin-bottom:4px;
+  }
+  .track-sub{
+    font-size:14px;
+    opacity:0.7;
+    letter-spacing:0.06em;
+    margin-bottom:24px;
+  }
+
+  .play-btn{
+    width:62px; height:62px;
+    border-radius:50%;
+    background:var(--gold);
+    border:none;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 24px -8px rgba(0,0,0,0.5);
+    transition:transform .25s ease;
+    margin:0 auto;
+  }
+  .play-btn:hover{ transform:scale(1.06); }
+  .play-btn svg{ width:22px; height:22px; fill:var(--wine-deep); }
+
+  .seek{
+    width:100%;
+    margin-top:24px;
+    accent-color:var(--gold);
+    cursor:pointer;
+  }
+  .time-row{
+    display:flex; justify-content:space-between;
+    font-size:12px; opacity:0.7;
+    margin-top:6px;
+    font-family:'Cormorant Garamond', serif;
+  }
+
+  .music-note{
+    text-align:center;
+    margin-top:22px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    opacity:0.7;
+    font-style:italic;
+  }
+
+  footer{
+    position:relative; z-index:2;
+    text-align:center;
+    padding:30px 20px 50px;
+    font-size:13px;
+    letter-spacing:0.1em;
+    color:var(--ink-soft);
+    opacity:0.55;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  /* ============ LOCK SCREEN ============ */
+  #lockScreen{
+    position:fixed; inset:0;
+    z-index:1000;
+    background:
+      radial-gradient(circle at 50% 30%, rgba(201,162,75,0.10), transparent 55%),
+      var(--paper);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    transition:opacity .8s ease, visibility .8s ease;
+  }
+  #lockScreen.unlocked{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+  body.is-locked > *:not(#lockScreen){
+    display:none;
+  }
+
+  .lock-card{
+    width:100%;
+    max-width:380px;
+    text-align:center;
+  }
+
+  .heart-lock{
+    width:148px;
+    height:148px;
+    margin:0 auto 30px;
+    position:relative;
+  }
+  .heart-lock svg{ width:100%; height:100%; overflow:visible; }
+
+  .heart-shape{
+    fill:url(#heartGrad);
+    transition:transform .15s ease;
+    transform-origin:100px 95px;
+  }
+  #lockForm.shake .heart-shape{ animation:lockShake .5s ease; }
+  @keyframes lockShake{
+    0%,100%{ transform:translateX(0); }
+    20%{ transform:translateX(-7px) rotate(-2deg); }
+    40%{ transform:translateX(6px) rotate(2deg); }
+    60%{ transform:translateX(-5px) rotate(-1deg); }
+    80%{ transform:translateX(4px) rotate(1deg); }
+  }
+
+  .shackle{
+    transition:transform .6s cubic-bezier(.34,1.56,.64,1), opacity .4s ease;
+    transform-origin:100px 60px;
+  }
+  #lockScreen.unlocking .shackle{
+    transform:translateY(-16px) rotate(-22deg);
+  }
+  #lockScreen.unlocking .heart-shape{
+    animation:heartPulse .7s ease;
+  }
+  @keyframes heartPulse{
+    0%{ transform:scale(1); }
+    35%{ transform:scale(1.12); }
+    60%{ transform:scale(0.96); }
+    100%{ transform:scale(1); }
+  }
+
+  .lock-eyebrow{
+    text-transform:uppercase;
+    letter-spacing:0.3em;
+    font-size:12px;
+    color:var(--wine);
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .lock-title{
+    font-size:clamp(24px,5vw,30px);
+    color:var(--wine-deep);
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .lock-sub{
+    font-size:15px;
+    color:var(--ink-soft);
+    font-style:italic;
+    margin-bottom:30px;
+  }
+
+  #lockForm{ display:flex; flex-direction:column; align-items:center; gap:16px; }
+
+  .lock-input-row{
+    width:100%;
+    position:relative;
+  }
+  #lockInput{
+    width:100%;
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    text-align:center;
+    letter-spacing:0.04em;
+    padding:14px 18px;
+    border-radius:999px;
+    border:1.5px solid rgba(107,39,55,0.25);
+    background:rgba(255,255,255,0.6);
+    color:var(--ink);
+    outline:none;
+    transition:border-color .25s ease, box-shadow .25s ease;
+  }
+  #lockInput::placeholder{ color:var(--ink-soft); opacity:0.55; }
+  #lockInput:focus{
+    border-color:var(--wine);
+    box-shadow:0 0 0 4px rgba(107,39,55,0.1);
+  }
+
+  .lock-submit{
+    font-family:'Cormorant Garamond', serif;
+    font-size:15px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    background:var(--wine);
+    color:var(--blush);
+    border:none;
+    padding:13px 32px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .3s ease, transform .2s ease;
+  }
+  .lock-submit:hover{ background:var(--wine-deep); transform:translateY(-1px); }
+
+  .lock-error{
+    font-size:13.5px;
+    color:var(--wine);
+    min-height:18px;
+    opacity:0;
+    transition:opacity .3s ease;
+  }
+  .lock-error.show{ opacity:1; }
+
+  .lock-hint{
+    margin-top:22px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    opacity:0.55;
+    font-style:italic;
+  }
+
+  /* ============ 3D PHOTO CAROUSEL (home) ============ */
+  .carousel-stage{
+    width:100%;
+    max-width:640px;
+    margin:8px auto 36px;
+    perspective:1100px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .carousel-3d{
+    position:relative;
+    width:150px;
+    height:190px;
+    transform-style:preserve-3d;
+    animation:carouselSpin 28s linear infinite;
+  }
+  .carousel-stage:hover .carousel-3d,
+  .carousel-stage:focus-within .carousel-3d{
+    animation-play-state:paused;
+  }
+  @keyframes carouselSpin{
+    from{ transform:rotateY(0deg); }
+    to{ transform:rotateY(360deg); }
+  }
+
+  .cara-card{
+    position:absolute;
+    inset:0;
+    border-radius:8px;
+    background:var(--blush);
+    padding:9px 9px 30px;
+    box-shadow:0 14px 30px -12px rgba(74,31,41,0.45);
+    backface-visibility:hidden;
+    transform-style:preserve-3d;
+  }
+  .cara-card .photo{
+    width:100%; height:100%;
+    border-radius:3px;
+    background:
+      linear-gradient(135deg, rgba(107,39,55,0.10), rgba(201,162,75,0.16)),
+      repeating-linear-gradient(45deg, rgba(107,39,55,0.05) 0 2px, transparent 2px 14px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--wine);
+    opacity:0.6;
+  }
+  .cara-card .cap{
+    position:absolute;
+    bottom:9px; left:0; right:0;
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .cara-card .num{
+    position:absolute;
+    top:8px; left:10px;
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--gold);
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+  }
+
+  .carousel-hint{
+    margin-top:26px;
+    font-size:12.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--sage);
+    text-align:center;
+  }
+
+  @media (max-width:560px){
+    .carousel-3d{ width:118px; height:152px; }
+  }
+</style>
+</head>
+<body class="is-locked">
+
+<div id="lockScreen">
+  <div class="lock-card">
+    <div class="lock-eyebrow">for lovey's eyes only</div>
+    <div class="lock-title">this page is locked</div>
+    <div class="lock-sub">say the magic words to open it</div>
+
+    <div class="heart-lock">
+      <svg viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="heartGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8c3349"/>
+            <stop offset="100%" stop-color="#4E1B27"/>
+          </linearGradient>
+        </defs>
+        <path class="shackle" d="M78 64 C78 40, 122 40, 122 64 L122 80 L108 80 L108 64 C108 54, 92 54, 92 64 L92 80 L78 80 Z"
+              fill="none" stroke="#C9A24B" stroke-width="9" stroke-linecap="round"/>
+        <path class="heart-shape" d="M100 165
+              C 40 120, 10 85, 10 55
+              C 10 25, 35 8, 60 8
+              C 78 8, 92 18, 100 32
+              C 108 18, 122 8, 140 8
+              C 165 8, 190 25, 190 55
+              C 190 85, 160 120, 100 165 Z"/>
+        <circle cx="100" cy="78" r="9" fill="#E2C988"/>
+        <path d="M100 84 L100 100 L93 112 L107 112 L100 100" fill="#E2C988"/>
+      </svg>
+    </div>
+
+    <form id="lockForm" autocomplete="off">
+      <div class="lock-input-row">
+        <input type="text" id="lockInput" placeholder="enter the password..." autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="lock-error" id="lockError">that's not quite it — try again 💔</div>
+      <button type="submit" class="lock-submit">unlock</button>
+    </form>
+
+    <div class="lock-hint">hint: three words, exactly how you feel</div>
+  </div>
+</div>
+
+
+<div class="grain"></div>
+<div class="petal-field" id="petalField"></div>
+
+<nav>
+  <button data-target="home" class="active">Home</button>
+  <button data-target="gallery">Gallery</button>
+  <button data-target="letter">Letter</button>
+  <button data-target="music">Music</button>
+</nav>
+
+<!-- ================= HOME ================= -->
+<section id="home" class="active">
+  <div class="home-stage">
+    <div class="eyebrow">a little surprise for you</div>
+    <div class="bloom-wrap" id="bloomWrap"></div>
+
+    <div class="carousel-stage">
+      <div class="carousel-3d" id="carousel3d"></div>
+      <div class="carousel-hint">our little orbit — hover to pause</div>
+    </div>
+
+    <h1 class="home-title">happymonthsary, <em>lovey</em></h1>
+    <p class="home-sub">every month with you blooms into something new</p>
+
+    <div class="ornament-row">
+      <div class="ornament-line"></div>
+      <svg viewBox="0 0 24 24" fill="var(--wine)">
+        <path d="M12 21s-7.5-4.6-10-9.3C0.3 8.4 2 5 5.4 5c2 0 3.4 1.1 4.1 2.2C10.2 6.1 11.6 5 13.6 5 17 5 18.7 8.4 17 11.7 14.5 16.4 12 21 12 21z"/>
+      </svg>
+      <div class="ornament-line"></div>
+    </div>
+    <div class="ornament-words">made just for you</div>
+
+    <div class="enter-hint" data-target="letter">open your letter &nbsp;→</div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="eyebrow">A Collection of Memories</div>
+    <h2 class="home-title" style="font-size:clamp(28px,5vw,42px); text-align:center;">Our Story in Pictures</h2>
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <div class="gallery-note">swap these placeholders for your own photos any time 💌</div>
+  </div>
+</section>
+
+<!-- ================= LETTER ================= -->
+<section id="letter">
+  <div class="wrap">
+    <div class="eyebrow">for your eyes only</div>
+    <h2 class="home-title" style="font-size:clamp(28px,5vw,42px); text-align:center; margin-bottom:30px;">a letter, sealed with love</h2>
+
+    <div class="letter-stage">
+      <div>
+        <div class="envelope" id="envelope">
+          <div class="env-body"></div>
+          <div class="flap"></div>
+          <div class="seal">
+            <svg viewBox="0 0 24 24"><path fill="#4E1B27" d="M12 21s-7.5-4.6-10-9.3C0.3 8.4 2 5 5.4 5c2 0 3.4 1.1 4.1 2.2C10.2 6.1 11.6 5 13.6 5 17 5 18.7 8.4 17 11.7 14.5 16.4 12 21 12 21z"/></svg>
+          </div>
+        </div>
+        <div class="letter-hint">tap to open</div>
+      </div>
+    </div>
+
+    <div class="letter-paper" id="letterPaper">
+      <h3>Happy Monthsary Lovey</h3>
+
+      <p>Happy monthsary lovey I just want to tell you how much I love you. Through all the good days and even the bad ones, my love for you never changes.</p>
+
+      <p>Thank you for staying with me and for all the little things that make me who I am. Thank you for making me feel loved in ways words can't fully explain maldita na cutie.</p>
+
+      <p>I made this website kay gusto nako hatagan ka ug something sweet na para sa imo lang. d pa kaayo ko maayo mo design pero it's made with love. I hope every time you come back to this page, you'll remember how special you are to me lovey❤️</p>
+
+      <p>Thank you for loving me Every moment with you is a memory I treasure.</p>
+
+      <p>Iloveyoumore than words can say,</p>
+
+      <div class="sign">— Always yours lovey❤️</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MUSIC ================= -->
+<section id="music">
+  <div class="wrap">
+    <div class="eyebrow">our song</div>
+    <h2 class="home-title" style="font-size:clamp(28px,5vw,42px); text-align:center;">play it again</h2>
+
+    <div class="player">
+      <div class="vinyl" id="vinyl"></div>
+      <div class="track-title" id="trackTitle">add your song</div>
+      <div class="track-sub">happymonthsary &amp; lovey</div>
+
+      <button class="play-btn" id="playBtn" aria-label="play">
+        <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+
+      <input type="range" class="seek" id="seek" value="0" min="0" max="100" step="0.1">
+      <div class="time-row">
+        <span id="curTime">0:00</span>
+        <span id="durTime">0:00</span>
+      </div>
+    </div>
+    <div class="music-note">drop a file named <strong>song.mp3</strong> into the assets folder and it'll play right here</div>
+    <audio id="audio" src="assets/Love me like you do.mp4" preload="metadata"></audio>
+  </div>
+</section>
+
+<footer>made with love, one month at a time</footer>
+
+<script>
+/* ---------------- LOCK SCREEN ---------------- */
+const LOCK_PASSWORD = "iloveyou lovey";
+const lockScreen = document.getElementById('lockScreen');
+const lockForm = document.getElementById('lockForm');
+const lockInput = document.getElementById('lockInput');
+const lockError = document.getElementById('lockError');
+
+function normalize(str){
+  return str.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+function unlockSite(){
+  lockScreen.classList.add('unlocking');
+  setTimeout(()=>{
+    lockScreen.classList.add('unlocked');
+    document.body.classList.remove('is-locked');
+  }, 550);
+}
+
+lockForm.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  if(normalize(lockInput.value) === normalize(LOCK_PASSWORD)){
+    lockError.classList.remove('show');
+    unlockSite();
+  } else {
+    lockError.classList.add('show');
+    lockForm.classList.remove('shake');
+    void lockForm.offsetWidth;
+    lockForm.classList.add('shake');
+    lockInput.value = '';
+    lockInput.focus();
+  }
+});
+
+window.addEventListener('DOMContentLoaded', ()=> lockInput.focus());
+
+/* ---------------- NAV ---------------- */
+const sections = document.querySelectorAll('section');
+const navBtns = document.querySelectorAll('nav button');
+function goTo(id){
+  sections.forEach(s => s.classList.toggle('active', s.id === id));
+  navBtns.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+  window.scrollTo({top:0, behavior:'instant'});
+}
+document.querySelectorAll('[data-target]').forEach(el=>{
+  el.addEventListener('click', ()=> goTo(el.dataset.target));
+});
+
+/* ---------------- BLOOMING FLOWER (SVG, hand-built petals) ---------------- */
+const bloomWrap = document.getElementById('bloomWrap');
+const NS = "http://www.w3.org/2000/svg";
+
+function makeSVG(tag, attrs){
+  const el = document.createElementNS(NS, tag);
+  for(const k in attrs) el.setAttribute(k, attrs[k]);
+  return el;
+}
+
+const svg = makeSVG('svg', {viewBox:'0 0 400 400', width:'100%', height:'100%'});
+bloomWrap.appendChild(svg);
+const defs = makeSVG('defs', {});
+svg.appendChild(defs);
+
+const stem = makeSVG('path', {
+  d:'M200 400 C 200 320, 200 280, 200 230',
+  stroke:'#8A9B7E', 'stroke-width':'5', fill:'none', 'stroke-linecap':'round'
+});
+svg.appendChild(stem);
+
+[[170,330,-1],[230,300,1]].forEach(([lx,ly,dir],i)=>{
+  const leaf = makeSVG('path', {
+    d:`M200 ${ly+10} C ${200+dir*10} ${ly}, ${lx} ${ly-20}, ${lx+dir*10} ${ly-10} C ${lx+dir*30} ${ly}, ${210+dir*15} ${ly+20}, 200 ${ly+10} Z`,
+    fill:'#8A9B7E', opacity:'0'
+  });
+  svg.appendChild(leaf);
+  leaf.animate(
+    [{opacity:0, transform:'scale(0.3)'},{opacity:0.9, transform:'scale(1)'}],
+    {duration:900, delay:300+i*200, fill:'forwards', easing:'cubic-bezier(.2,.8,.3,1.1)'}
+  );
+});
+
+const center = {x:200, y:210};
+const ringConfig = [
+  {count:6, len:95, wid:46, rot:0,  colorA:'#6B2737', colorB:'#4E1B27', delayBase:0},
+  {count:6, len:74, wid:38, rot:30, colorA:'#8c3349', colorB:'#6B2737', delayBase:260},
+  {count:5, len:50, wid:30, rot:15, colorA:'#C9A24B', colorB:'#a9843a', delayBase:520},
+];
+
+function petalPath(cx, cy, len, wid){
+  return `M ${cx} ${cy}
+          C ${cx-wid/2} ${cy-len*0.35}, ${cx-wid/2} ${cy-len*0.8}, ${cx} ${cy-len}
+          C ${cx+wid/2} ${cy-len*0.8}, ${cx+wid/2} ${cy-len*0.35}, ${cx} ${cy}
+          Z`;
+}
+
+ringConfig.forEach((ring, ringIdx)=>{
+  const grad = makeSVG('linearGradient', {id:`g${ringIdx}`, x1:'0', y1:'1', x2:'0', y2:'0'});
+  const stop1 = makeSVG('stop', {offset:'0%', 'stop-color':ring.colorB});
+  const stop2 = makeSVG('stop', {offset:'100%', 'stop-color':ring.colorA});
+  grad.appendChild(stop1); grad.appendChild(stop2);
+  defs.appendChild(grad);
+
+  for(let i=0;i<ring.count;i++){
+    const angle = (360/ring.count)*i + ring.rot;
+    const g = makeSVG('g', {transform:`rotate(${angle} ${center.x} ${center.y})`});
+    const p = makeSVG('path', {
+      d:petalPath(center.x, center.y, ring.len, ring.wid),
+      fill:`url(#g${ringIdx})`,
+      opacity:'0',
+      stroke:'rgba(0,0,0,0.06)',
+      'stroke-width':'1'
+    });
+    g.appendChild(p);
+    svg.appendChild(g);
+
+    const delay = ring.delayBase + i*70;
+    p.animate(
+      [
+        {opacity:0, transform:'scale(0.15) rotate(-18deg)', transformOrigin:`${center.x}px ${center.y}px`},
+        {opacity:1, transform:'scale(1) rotate(0deg)', transformOrigin:`${center.x}px ${center.y}px`}
+      ],
+      {duration:850, delay, fill:'forwards', easing:'cubic-bezier(.17,.84,.32,1.2)'}
+    );
+  }
+});
+
+const centerCircle = makeSVG('circle', {cx:center.x, cy:center.y, r:'14', fill:'#E2C988', opacity:'0'});
+svg.appendChild(centerCircle);
+centerCircle.animate(
+  [{opacity:0, transform:'scale(0.2)'},{opacity:1, transform:'scale(1)'}],
+  {duration:600, delay:850, fill:'forwards', easing:'ease-out', transformOrigin:`${center.x}px ${center.y}px`}
+);
+
+setTimeout(()=>{
+  svg.animate(
+    [{transform:'rotate(-1.4deg)'},{transform:'rotate(1.4deg)'},{transform:'rotate(-1.4deg)'}],
+    {duration:6000, iterations:Infinity, easing:'ease-in-out', transformOrigin:'200px 400px'}
+  );
+}, 1600);
+
+/* ---------------- AMBIENT FALLING PETALS ---------------- */
+const petalField = document.getElementById('petalField');
+const petalSVG = (color) => `<svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 0 C13 2 16 6 9 18 C2 6 5 2 9 0Z" fill="${color}"/></svg>`;
+const petalColors = ['#C9A24B','#6B2737','#E2C988','#8A9B7E'];
+for(let i=0;i<14;i++){
+  const el = document.createElement('div');
+  el.className = 'petal';
+  el.innerHTML = petalSVG(petalColors[i % petalColors.length]);
+  const size = 10 + Math.random()*10;
+  el.style.left = Math.random()*100 + 'vw';
+  el.style.width = size+'px';
+  el.style.opacity = 0.4 + Math.random()*0.4;
+  el.style.setProperty('--drift', (Math.random()*120-60)+'px');
+  el.style.animationDuration = (10 + Math.random()*10)+'s';
+  el.style.animationDelay = (Math.random()*-20)+'s';
+  petalField.appendChild(el);
+}
+
+/* ---------------- 3D PHOTO CAROUSEL (home, 8 photos) ---------------- */
+const carousel3d = document.getElementById('carousel3d');
+const CARA_RADIUS = 230;
+
+const caraPhotos = [
+  { file:'8.jpeg', cap:'Seniors ball 2023' },
+  { file:'9.jpeg', cap:'Dancing with my girl' },
+  { file:'10.jpeg', cap:'Late night walk' },
+  { file:'11.jpeg', cap:'Shopping date' },
+  { file:'1.jpeg', cap:'Monthsary Date' },
+  { file:'4.jpeg', cap:'Monthsary Date' },
+  { file:'5.jpeg', cap:'A colorful day with my favorite person' },
+  { file:'13.jpeg', cap:'Movie Date' },
+];
+const PLACEHOLDER_HEART = `<svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.3C0.3 8.4 2 5 5.4 5c2 0 3.4 1.1 4.1 2.2C10.2 6.1 11.6 5 13.6 5 17 5 18.7 8.4 17 11.7 14.5 16.4 12 21 12 21z" opacity="0.5"/></svg>`;
+
+caraPhotos.forEach((p, i)=>{
+  const angle = (360/caraPhotos.length) * i;
+  const card = document.createElement('div');
+  card.className = 'cara-card';
+  card.style.transform = `rotateY(${angle}deg) translateZ(${CARA_RADIUS}px)`;
+  card.innerHTML = `
+    <div class="num">${String(i+1).padStart(2,'0')}</div>
+    <div class="photo" id="cara-photo-${i}">${PLACEHOLDER_HEART}</div>
+    <div class="cap">${p.cap}</div>
+  `;
+  carousel3d.appendChild(card);
+
+  const img = new Image();
+  img.onload = ()=>{
+    const slot = document.getElementById(`cara-photo-${i}`);
+    slot.style.opacity = '1';
+    slot.innerHTML = '';
+    img.alt = p.cap;
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:3px;';
+    slot.appendChild(img);
+  };
+  img.src = `assets/carousel/${p.file}`;
+});
+
+/* ---------------- GALLERY ---------------- */
+const galleryGrid = document.getElementById('galleryGrid');
+const tilts = ['-3deg','2deg','-1.5deg','3deg','-2deg','1.5deg'];
+
+const galleryPhotos = [
+  { file:'8.jpeg', cap:'Senior\u2019s Ball 2023 with my favorite person' },
+  { file:'9.jpeg', cap:'Dancing with my lovey at Senior\u2019s Ball' },
+  { file:'11.jpeg', cap:'Shopping date with lovey' },
+  { file:'10.jpeg', cap:'Late night walking with lovey' },
+  { file:'15.jpeg', cap:'Movie Date With lovey' },
+  { file:'1.jpeg', cap:'Monthsary Dinner Date with lovey' },
+];
+
+galleryPhotos.forEach((p, i)=>{
+  const div = document.createElement('div');
+  div.className = 'frame';
+  div.style.setProperty('--tilt', tilts[i % tilts.length]);
+  div.innerHTML = `
+    <div class="photo" id="gallery-photo-${i}">${PLACEHOLDER_HEART}</div>
+    <div class="cap">${p.cap}</div>
+  `;
+  galleryGrid.appendChild(div);
+
+  const img = new Image();
+  img.onload = ()=>{
+    const slot = document.getElementById(`gallery-photo-${i}`);
+    slot.style.opacity = '1';
+    slot.innerHTML = '';
+    img.alt = p.cap;
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:2px;';
+    slot.appendChild(img);
+  };
+  img.src = `assets/gallery/${p.file}`;
+});
+
+/* ---------------- LETTER / ENVELOPE ---------------- */
+const envelope = document.getElementById('envelope');
+const letterPaper = document.getElementById('letterPaper');
+envelope.addEventListener('click', ()=>{
+  envelope.classList.add('open');
+  setTimeout(()=> letterPaper.classList.add('show'), 350);
+});
+
+/* ---------------- MUSIC PLAYER ---------------- */
+const audio = document.getElementById('audio');
+const playBtn = document.getElementById('playBtn');
+const playIcon = document.getElementById('playIcon');
+const vinyl = document.getElementById('vinyl');
+const seek = document.getElementById('seek');
+const curTime = document.getElementById('curTime');
+const durTime = document.getElementById('durTime');
+const trackTitle = document.getElementById('trackTitle');
+
+const ICON_PLAY = '<path d="M8 5v14l11-7z"/>';
+const ICON_PAUSE = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+
+function fmt(t){
+  if(!isFinite(t)) return '0:00';
+  const m = Math.floor(t/60), s = Math.floor(t%60);
+  return `${m}:${s.toString().padStart(2,'0')}`;
+}
+
+audio.addEventListener('loadedmetadata', ()=>{
+  durTime.textContent = fmt(audio.duration);
+  seek.max = audio.duration;
+  trackTitle.textContent = 'our song';
+});
+audio.addEventListener('error', ()=>{
+  trackTitle.textContent = 'add your song';
+});
+
+playBtn.addEventListener('click', ()=>{
+  if(audio.paused){
+    audio.play().then(()=>{
+      playIcon.innerHTML = ICON_PAUSE;
+      vinyl.classList.add('spin');
+    }).catch(()=>{
+      trackTitle.textContent = 'add assets/song.mp3';
+    });
+  } else {
+    audio.pause();
+    playIcon.innerHTML = ICON_PLAY;
+    vinyl.classList.remove('spin');
+  }
+});
+
+audio.addEventListener('timeupdate', ()=>{
+  curTime.textContent = fmt(audio.currentTime);
+  seek.value = audio.currentTime;
+});
+seek.addEventListener('input', ()=>{ audio.currentTime = seek.value; });
+audio.addEventListener('ended', ()=>{
+  playIcon.innerHTML = ICON_PLAY;
+  vinyl.classList.remove('spin');
+});
+</script>
+
+</body>
+</html>
